@@ -1,0 +1,63 @@
+<PopUI>:
+    c_text:c_text
+
+
+    orientation:"vertical"
+    padding:10
+    Label:
+        id:c_text
+        text:""
+    Button:
+        text:"OK"
+        size_hint:(None,None)
+        size:root.width/4,root.height/4
+        pos_hint:{"center_y":.5,"center_x":.5}
+        on_release:root.close()
+
+
+
+
+
+<Translator>:
+
+    text_in:text_in
+    lang:lang
+    btn_layout:btn_layout
+    size:root.width,root.height
+    GridLayout:
+        cols:1
+        padding:20
+        spacing:10
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, .9
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+        TextInput:
+            id:text_in
+            text:""
+            hint_text:"Type here.."
+            padding:30
+
+
+        BoxLayout:
+            id:btn_layout
+            orientation:"vertical" if root.width<=200 else "horizontal"
+            size_hint:1,0.5
+            spacing:5
+            Spinner:
+                id:lang
+                text: 'english'
+                values: 'Home', 'Work', 'Other', 'Custom'
+                size_hint:(1,None) if root.width<=200 else (1,0.2)
+                height:200
+                pos_hint:{"center_y":.5,"center_x":.5}
+            Button:
+                size_hint:(1,None) if root.width<=200 else (1,0.2)
+                height:200
+                pos_hint:{"center_y":.5,"center_x":.5}
+                text:"Speak"
+                on_release:root.speak()
